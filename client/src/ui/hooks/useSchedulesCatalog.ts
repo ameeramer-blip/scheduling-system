@@ -8,6 +8,8 @@ export type SchedulesCatalogState = {
   loading: boolean
   error: string | null
   refresh: () => Promise<void>
+  /** Remove a row locally after DELETE so the list updates without relying on cached GET responses. */
+  removeSchedule: (id: number) => void
 }
 
 /**
@@ -33,9 +35,13 @@ export function useSchedulesCatalog(): SchedulesCatalogState {
     }
   }, [])
 
+  const removeSchedule = useCallback((id: number) => {
+    setSchedules((prev) => prev.filter((s) => s.id !== id))
+  }, [])
+
   useEffect(() => {
     void refresh()
   }, [refresh])
 
-  return { tasks, schedules, loading, error, refresh }
+  return { tasks, schedules, loading, error, refresh, removeSchedule }
 }

@@ -7,7 +7,7 @@ import { ScheduleEditor } from './ScheduleEditor'
 import { ScheduleTable } from './ScheduleTable'
 
 export function App() {
-  const { tasks, schedules, loading, error, refresh } = useSchedulesCatalog()
+  const { tasks, schedules, loading, error, refresh, removeSchedule } = useSchedulesCatalog()
   const [editorOpen, setEditorOpen] = useState(false)
   const [editing, setEditing] = useState<ScheduleDto | null>(null)
 
@@ -17,6 +17,7 @@ export function App() {
     if (!window.confirm('Delete this schedule?')) return
     try {
       await api.deleteSchedule(id)
+      removeSchedule(id)
       await refresh()
     } catch (err) {
       window.alert(err instanceof Error ? err.message : String(err))
@@ -40,7 +41,7 @@ export function App() {
       <header className="page-header">
         <div>
           <h1 className="h1">Scheduling System</h1>
-          <p className="muted mb-0">Manage when predefined tasks run (backend uses Quartz).</p>
+          <p className="muted mb-0">Manage when predefined tasks run.</p>
         </div>
         <div className="row">
           <button type="button" onClick={() => void refresh()} disabled={loading}>

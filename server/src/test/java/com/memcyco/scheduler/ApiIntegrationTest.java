@@ -74,7 +74,7 @@ class ApiIntegrationTest {
         .andExpect(jsonPath("$[0].id").value(id));
 
     mvc.perform(delete("/api/schedules/" + id))
-        .andExpect(status().isOk());
+        .andExpect(status().isNoContent());
   }
 }
 
