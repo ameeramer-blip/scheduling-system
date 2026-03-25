@@ -1,0 +1,40 @@
+# -----------------------------------------------------------------------------
+# MySQL — defaults match ../docker-compose.yml (user memcyco / DB memcyco_scheduler).
+# 1) From repo root: docker compose up -d
+# 2) Run server: cd server && .\mvnw.cmd spring-boot:run
+# Override with MYSQL_URL, MYSQL_USER, MYSQL_PASSWORD if you use another MySQL.
+# Optional file: application-local.example.yml -> application-local.yml + profile local
+# See: server/.env.example
+# -----------------------------------------------------------------------------
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: ${MYSQL_URL:jdbc:mysql://localhost:3306/memcyco_scheduler?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC}
+    username: ${MYSQL_USER:memcyco}
+    password: ${MYSQL_PASSWORD:memcyco_app}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+
+  quartz:
+    job-store-type: memory
+    properties:
+      org:
+        quartz:
+          scheduler:
+            instanceName: memcycoScheduler
+          threadPool:
+            threadCount: 5
+
+app:
+  cors:
+    # Comma-separated (CorsConfig). Include :80 for Docker nginx UI + Vite dev port.
+    allowed-origins: http://localhost:5173,http://localhost,http://127.0.0.1

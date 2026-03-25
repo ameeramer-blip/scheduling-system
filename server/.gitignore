@@ -1,0 +1,2 @@
+# Local overrides with real passwords — do not commit
+application-local.yml

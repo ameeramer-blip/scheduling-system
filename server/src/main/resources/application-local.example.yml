@@ -1,0 +1,12 @@
+# Copy this file to: application-local.yml (same folder: src/main/resources/)
+# Then run with Spring profile "local":
+#   PowerShell: $env:SPRING_PROFILES_ACTIVE="local"; .\mvnw.cmd spring-boot:run
+#   IntelliJ VM options or Environment: SPRING_PROFILES_ACTIVE=local
+#
+# application-local.yml is gitignored — put your real MySQL password there only on your machine.
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/memcyco_scheduler?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: memcyco
+    password: CHANGE_ME_OR_USE_DOCKER_DEFAULT_memcyco_app
