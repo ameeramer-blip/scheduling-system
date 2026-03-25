@@ -42,8 +42,6 @@ cd server
 .\mvnw.cmd spring-boot:run
 ```
 
-Or: `.\run-server-with-docker-db.ps1` from the repo root.
-
 ### Tests (no Docker required)
 
 ```powershell
@@ -69,45 +67,6 @@ Uses the `h2` profile (in-memory DB).
 - Docker Desktop is available when using compose; JDK 17+ is available for local Maven runs.
 - Port **80** (UI), **8080** (API), and **3306** (MySQL) are free, or you will change `ports` in `docker/docker-compose.yml`.
 - `spring.jpa.hibernate.ddl-auto: update` is acceptable for the assignment (schema managed by Hibernate against MySQL).
-
----
-
-## Git: connect this project to a remote repository
-
-1. **Create an empty repo** on GitHub (or GitLab, etc.) — no README if you will push an existing tree, or allow merge.
-
-2. **In this folder**, if Git is not initialized yet:
-
-```powershell
-cd C:\Users\amirA\IdeaProjects\MEMCYCO
-git init
-```
-
-3. **Add a root `.gitignore`** (ignore `node_modules`, `target`, `.idea`, local env files). **Do not commit** secrets or `application-local.yml`.
-
-4. **First commit and branch:**
-
-```powershell
-git add .
-git commit -m "Initial commit: scheduling system"
-git branch -M main
-```
-
-5. **Add remote and push** (replace URL with your repo):
-
-```powershell
-git remote add origin https://github.com/YOUR_USER/YOUR_REPO.git
-git push -u origin main
-```
-
-If GitHub asks for credentials, use a **Personal Access Token** (PAT) instead of a password when using HTTPS.
-
-6. **Clone elsewhere (another machine):**
-
-```powershell
-git clone https://github.com/YOUR_USER/YOUR_REPO.git
-cd YOUR_REPO
-```
 
 ---
 

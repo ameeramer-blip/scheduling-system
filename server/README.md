@@ -37,12 +37,6 @@ cd server
 
 The app defaults **`application.yml`** to user `memcyco` / password `memcyco_app`, matching `docker-compose.yml`. The DB is created inside the container.
 
-
-
-**One-shot** (starts DB then server): from repo root run `.\run-server-with-docker-db.ps1`.
-
-
-
 If port **3306** is busy, change `docker-compose.yml` to map `3307:3306` and set `MYSQL_URL` to use `localhost:3307` (or run PowerShell with `$env:MYSQL_URL="...3307..."`).
 
 
